@@ -5,6 +5,9 @@ import com.sparta.first_project.dto.CommentRequestDto;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Builder
 @Entity // JPA가 관리할 수 있는 Entity 클래스 지정
 @Getter
