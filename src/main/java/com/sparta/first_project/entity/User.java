@@ -26,7 +26,6 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column
     private String intro;
 
     @Column(nullable = false)

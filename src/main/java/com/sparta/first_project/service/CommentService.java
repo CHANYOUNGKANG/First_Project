@@ -34,7 +34,6 @@ public class CommentService {
 
         // 댓글 저장
         Comment savedComment = commentRepository.save(comment);
-
         return new CommentResponseDto(savedComment);
     }
 

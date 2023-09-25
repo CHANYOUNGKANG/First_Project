@@ -42,8 +42,8 @@ public class PostService {
                 .toList();
     }
 
-    @Transactional(readOnly = true)
     // 단일 조회
+    @Transactional(readOnly = true)
     public PostResponseDto findPostById(Long id) {
         Post findPost = findPost(id);
         return new PostResponseDto(findPost);
@@ -105,5 +105,4 @@ public class PostService {
     public Page<Post> getPost(Pageable pageable) {
         return postRepository.findAll(pageable);
     }
-
 }

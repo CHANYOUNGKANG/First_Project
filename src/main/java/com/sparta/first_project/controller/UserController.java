@@ -135,4 +135,15 @@ public class UserController {
         return new UserInfoDto(username);
     }
 
+//    // 구글 로그인
+//    @GetMapping("/user/google/callback")
+//    public String googleLogin(@RequestParam String code, HttpServletResponse response) throws JsonProcessingException {
+//        String token = googleService.googleLogin(code);
+//
+//        Cookie cookie = new Cookie(JwtUtil.AUTHORIZATION_HEADER, token.substring(7));
+//        cookie.setPath("/");
+//        response.addCookie(cookie);
+//
+//        return "redirect:/";
+//    }
 }
