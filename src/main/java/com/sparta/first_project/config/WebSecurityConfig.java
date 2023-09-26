@@ -49,7 +49,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("https://hh99-music-test.vercel.app/")
+                .allowedOrigins("https://hh99-music-test.vercel.app/","http://localhost:5173", "https://chanyoungkang.com")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // 허용할 HTTP method
                 .allowedHeaders("Content-Type", "X-AUTH-TOKEN", "Authorization", "Authorization_Refresh", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials")
                 .allowCredentials(true) // 쿠키 인증 요청 허용
@@ -59,7 +59,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://hh99-music-test.vercel.app/"));
+        configuration.setAllowedOrigins(Arrays.asList("https://hh99-music-test.vercel.app/","http://localhost:5173", "https://chanyoungkang.com"));
         configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Authorization_Refresh", "Cache-Control", "Content-Type"));
         configuration.setExposedHeaders(Arrays.asList("Authorization", "Authorization_Refresh"));
