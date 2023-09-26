@@ -91,8 +91,6 @@ public class UserController {
     @DeleteMapping("{id}/delete")
     public ResponseEntity<BaseResponse> delete(
             @PathVariable Long id,
-            @RequestParam String password,
-            @RequestParam String confirmPassword,
             @AuthenticationPrincipal UserDetailsImpl userDetails
     ) {
         // 현재 로그인한 사용자의 정보를 가져옴
@@ -104,17 +102,7 @@ public class UserController {
             throw new IllegalArgumentException("권한이 없습니다.");
         }
 
-        // 비밀번호와 확인 비밀번호를 비교하여 일치하는지 확인
-        if (!password.equals(confirmPassword)) {
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
-        }
-
-        // 입력한 비밀번호와 현재 사용자의 비밀번호를 비교하여 일치하는지 확인
-        if (!passwordEncoder.matches(password, currentUser.getPassword())) {
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
-        }
-
-        userService.delete(id, password);
+        userService.delete(id);
         return ResponseEntity.ok().body(new SuccessResponse("회원 탈퇴 성공"));
     }
 
@@ -135,15 +123,4 @@ public class UserController {
         return new UserInfoDto(username);
     }
 
-//    // 구글 로그인
-//    @GetMapping("/user/google/callback")
-//    public String googleLogin(@RequestParam String code, HttpServletResponse response) throws JsonProcessingException {
-//        String token = googleService.googleLogin(code);
-//
-//        Cookie cookie = new Cookie(JwtUtil.AUTHORIZATION_HEADER, token.substring(7));
-//        cookie.setPath("/");
-//        response.addCookie(cookie);
-//
-//        return "redirect:/";
-//    }
 }
