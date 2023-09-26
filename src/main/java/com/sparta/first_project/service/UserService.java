@@ -80,15 +80,10 @@ public class UserService {
 
     // 회원탈퇴
     @Transactional
-    public void delete(Long id, String password) {
+    public void delete(Long id) {
         // 사용자를 ID로 검색
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
-
-        // 입력한 비밀번호를 암호화하여 저장된 비밀번호와 비교
-        if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
-        }
 
         List<Post> userPosts = postRepository.findByAuthor(user.getUsername());
 
