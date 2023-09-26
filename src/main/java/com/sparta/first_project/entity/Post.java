@@ -51,6 +51,7 @@ public class Post extends Timestamp {
     public void update(PostRequestDto postRequestDto) {
         this.title = postRequestDto.getTitle();
         this.content = postRequestDto.getContent();
+        this.url = postRequestDto.getUrl();
     }
 
     public void addComment(Comment comment) {
