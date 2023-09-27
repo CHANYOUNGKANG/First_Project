@@ -29,7 +29,6 @@ public class PostService {
     private final LikesRepository likesRepository;
 
     public PostResponseDto createPost(PostRequestDto postRequestDto, User user) {
-        // DB 저장
         postRequestDto.addAuthor(user.getUsername());
         Post post = new Post(postRequestDto);
         Post savedpost = postRepository.save(post);
@@ -42,7 +41,6 @@ public class PostService {
                 .toList();
     }
 
-    // 단일 조회
     @Transactional(readOnly = true)
     public PostResponseDto findPostById(Long id) {
         Post findPost = findPost(id);
@@ -53,7 +51,6 @@ public class PostService {
     public PostResponseDto updatePost(Long id, PostRequestDto postRequestDto, User user) {
         Post findPost = findPost(id);
 
-        // 수정하려는 user의 권한이 ADMIN 이거나 user가 게시글의 작성자 일 경우.
         if (user.getRole().equals(ADMIN) || findPost.getAuthor().equals(user.getUsername())) {
             findPost.update(postRequestDto);
             return new PostResponseDto(findPost);
@@ -65,7 +62,6 @@ public class PostService {
     public Long deletePost(Long id, User user) {
         Post findPost = findPost(id);
 
-        // 삭제하려는 user의 권한이 ADMIN 이거나 user가 게시글의 작성자 일 경우.
         if (user.getRole().equals(ADMIN) || findPost.getAuthor().equals(user.getUsername())) {
             commentRepository.deleteAll(findPost.getCommentList());
             likesRepository.deleteAll(findPost.getLikesList());
@@ -76,19 +72,17 @@ public class PostService {
     }
 
     @Transactional
-    public String likePostToggle(Long id, User user) {
+    public String toggleLikePost(Long id, User user) {
         Post findPost = findPost(id);
         Optional<Likes> findLikes = likesRepository.findByPostAndUser(findPost, user);
 
         String responseMessage = "";
 
-        // 이미 유저가 해당 게시물을 좋아요 했을 경우
         if (findLikes.isPresent()) {
             likesRepository.delete(findLikes.get());
             responseMessage = "좋아요 취소 성공";
             return responseMessage;
         }
-        // 유저가 해당 게시물을 좋아요 하지 않았을 경우
         Likes likes = new Likes(findPost, user);
         likesRepository.save(likes);
         responseMessage = "좋아요 성공";
@@ -101,7 +95,7 @@ public class PostService {
         });
     }
 
-    // 페이징
+
     public Page<Post> getPost(Pageable pageable) {
         return postRepository.findAll(pageable);
     }

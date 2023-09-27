@@ -1,6 +1,5 @@
 package com.sparta.first_project.repository;
 
-import com.sparta.first_project.entity.Comment;
 import com.sparta.first_project.entity.Likes;
 import com.sparta.first_project.entity.Post;
 import com.sparta.first_project.entity.User;

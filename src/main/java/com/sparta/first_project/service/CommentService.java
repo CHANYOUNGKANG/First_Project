@@ -41,7 +41,6 @@ public class CommentService {
     public CommentResponseDto updateComment(Long id, CommentRequestDto requestDto, User user) {
         Comment findComment = findComment(id);
 
-        // 유저의 권한이 ADMIN 이거나 댓글 작성한 user와 수정하려는 user가 같은 경우
         if (user.getRole().equals(ADMIN) || user.getUsername().equals(findComment.getUsername())) {
             findComment.update(requestDto);
             return new CommentResponseDto(findComment);
@@ -53,7 +52,6 @@ public class CommentService {
     public Long deleteComment(Long id, User user) {
         Comment findComment = findComment(id);
 
-        // 유저의 권한이 ADMIN 이거나 댓글 작성한 user와 삭제하려는 user가 같은 경우
         if (user.getRole().equals(ADMIN) || user.getUsername().equals(findComment.getUsername())) {
             commentRepository.delete(findComment);
             return id;

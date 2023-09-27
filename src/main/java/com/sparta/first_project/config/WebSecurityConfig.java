@@ -27,7 +27,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.Arrays;
 
 @Configuration
-@EnableWebSecurity // Spring Security 지원을 가능하게 함
+@EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig implements WebMvcConfigurer {
 
@@ -49,17 +49,17 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("https://hh99-music-test.vercel.app/","http://localhost:5173", "https://chanyoungkang.com")
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // 허용할 HTTP method
+                .allowedOrigins("https://hh99-music-test.vercel.app/", "http://localhost:5173", "https://chanyoungkang.com")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("Content-Type", "X-AUTH-TOKEN", "Authorization", "Authorization_Refresh", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials")
-                .allowCredentials(true) // 쿠키 인증 요청 허용
-                .maxAge(3000); // 원하는 시간만큼 pre-flight 리퀘스트를 캐싱
+                .allowCredentials(true)
+                .maxAge(3000);
     }
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://hh99-music-test.vercel.app/","http://localhost:5173", "https://chanyoungkang.com"));
+        configuration.setAllowedOrigins(Arrays.asList("https://hh99-music-test.vercel.app/", "http://localhost:5173", "https://chanyoungkang.com"));
         configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Authorization_Refresh", "Cache-Control", "Content-Type"));
         configuration.setExposedHeaders(Arrays.asList("Authorization", "Authorization_Refresh"));
@@ -84,32 +84,31 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        // CORS 설정
+
         http.cors((cors) -> cors.configurationSource(corsConfigurationSource()));
 
-        // CSRF 설정
+
         http.csrf((csrf) -> csrf.disable());
 
-        // 기본 설정인 Session 방식은 사용하지 않고 JWT 방식을 사용하기 위한 설정
+
         http.sessionManagement((sessionManagement) ->
                 sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         );
 
         http.authorizeHttpRequests((authorizeHttpRequests) ->
-                        authorizeHttpRequests
-                                .requestMatchers(
-                                        "/",// /로 시작하는 요청 모두 접근 허가
-                                        "/v3/api-docs/**",//v3/api-docs/**로 시작하는 요청 모두 접근 허가
-                                        "swagger-ui/**").permitAll()//swagger-ui.html 접근 허용 설정
-                                .requestMatchers("/api/users/**").permitAll() // '/api/user/'로 시작하는 요청 모두 접근 허가
-                                .requestMatchers(HttpMethod.GET, "/api/posts").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/post").permitAll()
-                                .anyRequest().authenticated()
+                authorizeHttpRequests
+                        .requestMatchers(
+                                "/",
+                                "/v3/api-docs/**",
+                                "swagger-ui/**").permitAll()
+                        .requestMatchers("/api/users/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/posts").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/post").permitAll()
+                        .anyRequest().authenticated()
         );
 
 
-        // 필터 관리
         http.addFilterBefore(jwtAuthorizationFilter(), JwtAuthenticationFilter.class);
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 

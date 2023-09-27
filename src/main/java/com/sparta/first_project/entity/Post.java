@@ -3,13 +3,16 @@ package com.sparta.first_project.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sparta.first_project.dto.PostRequestDto;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-@Entity // JPA가 관리할 수 있는 Entity 클래스 지정
+@Entity
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -31,13 +34,12 @@ public class Post extends Timestamp {
     @Column(nullable = false)
     private String author;
 
-    // 연관관계 주입
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
-    @JsonIgnore//무한참조 방지
+    @JsonIgnore
     private List<Comment> commentList = new ArrayList<>();
 
     @OneToMany(mappedBy = "post")
-    @JsonIgnore//무한참조 방지
+    @JsonIgnore
     private List<Likes> likesList = new ArrayList<>();
 
 

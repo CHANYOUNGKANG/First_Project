@@ -32,14 +32,15 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain) throws ServletException, IOException {
 
-        String accessToken = jwtUtil.getJwtFromHeader(req,JwtUtil.AUTHORIZATION_HEADER);
-        String refreshToken = jwtUtil.getJwtFromHeader(req,JwtUtil.REFRESH_HEADER);
+        String accessToken = jwtUtil.getJwtFromHeader(req, JwtUtil.AUTHORIZATION_HEADER);
+        String refreshToken = jwtUtil.getJwtFromHeader(req, JwtUtil.REFRESH_HEADER);
+
 
         if (StringUtils.hasText(accessToken)) {
 
             if (!jwtUtil.validateToken(accessToken)) {
                 String refresh = req.getHeader(JwtUtil.REFRESH_HEADER);
-                if (!jwtUtil.validateToken(refreshToken) || !refreshTokenRepository.existsByToken(refresh)){
+                if (!jwtUtil.validateToken(refreshToken) || !refreshTokenRepository.existsByToken(refresh)) {
                     res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                     log.info("Token이 만료 되었습니다.");
                     throw new JwtException("Refresh Token Error");
@@ -50,7 +51,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 String username = info.getSubject();
                 UserRoleEnum role = UserRoleEnum.valueOf(String.valueOf(info.get("auth")));
 
-                accessToken = jwtUtil.createToken(username,role);
+                accessToken = jwtUtil.createToken(username, role);
                 res.addHeader(JwtUtil.AUTHORIZATION_HEADER, accessToken);
                 accessToken = jwtUtil.substringToken(accessToken);
             }

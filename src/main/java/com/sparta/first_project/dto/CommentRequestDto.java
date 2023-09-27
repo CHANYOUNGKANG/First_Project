@@ -12,6 +12,7 @@ public class CommentRequestDto {
 
     private String username;
 
+
     public Comment toEntity() {
         return Comment.builder()
                 .content(this.getContent())

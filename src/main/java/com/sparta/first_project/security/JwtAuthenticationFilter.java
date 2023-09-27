@@ -23,14 +23,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private final JwtUtil jwtUtil;
     private final RefreshTokenRepository refreshTokenRepository;
 
-    //로그인
     public JwtAuthenticationFilter(JwtUtil jwtUtil, RefreshTokenRepository refreshTokenRepository) {
         this.jwtUtil = jwtUtil;
         this.refreshTokenRepository = refreshTokenRepository;
         setFilterProcessesUrl("/api/users/login");
     }
 
-    // 로그인 토큰 생성
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try {
@@ -59,8 +57,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         RefreshToken refreshToken = refreshTokenRepository.findByUsername(username).orElse(null);
         String refresh = jwtUtil.createRefreshToken(username, role);
-        if (refreshToken == null){
-            refreshToken = new RefreshToken(refresh,username);
+        if (refreshToken == null) {
+            refreshToken = new RefreshToken(refresh, username);
         } else {
             refreshToken.updateToken(refresh);
         }
@@ -68,14 +66,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         refreshTokenRepository.save(refreshToken);
         response.addHeader(JwtUtil.REFRESH_HEADER, refreshToken.getToken());
 
-        // 로그인 성공시 "로그인 성공" 메시지를 반환
         response.setStatus(HttpServletResponse.SC_OK);
         writeResponse(response, "로그인 성공");
     }
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) {
-        // 로그인 실패시 "아이디 또는 비밀번호가 틀렸습니다." 메시지를 반환
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         writeResponse(response, "아이디 또는 비밀번호가 틀렸습니다.");
     }
