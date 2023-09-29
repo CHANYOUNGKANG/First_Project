@@ -19,14 +19,9 @@
 # 기술 스택 
 <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"><img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"><img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"><img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"><img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white">
-<img src="https://img.shields.io/badge/apache tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=white"><a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer">
-  <img src="https://img.shields.io/badge/Cloud-Google-blue.svg?style=for-the-badge&logo=Google Cloud Platform" alt="Cloud: Google">
-</a>
-<a href="https://aws.amazon.com/" target="_blank" rel="noopener noreferrer">
-  <img src="https://img.shields.io/badge/Cloud-AWS-9cf.svg?style=for-the-badge&logo=Amazon Web Services" alt="Cloud: AWS">
-</a>
-<a href="https://spring.io/projects/spring-security" target="_blank" rel="noopener noreferrer">
-  <img src="https://img.shields.io/badge/Spring Security-2023.0.0-orange.svg?style=for-the-badge&logo=Spring Security" alt="Spring Security: 2023.0.0">
-</a>
+<img src="https://img.shields.io/badge/apache tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=white"><img src="https://img.shields.io/badge/Cloud-Google-blue.svg?style=for-the-badge&logo=Google Cloud Platform" alt="Cloud: Google">
+  <img src="https://img.shields.io/badge/Cloud-AWS-9cf.svg?style=for-the-badge&logo=Amazon Web Services" alt="Cloud: AWS">  <img src="https://img.shields.io/badge/Spring Security-2023.0.0-orange.svg?style=for-the-badge&logo=Spring Security" alt="Spring Security: 2023.0.0">
+
+
 
 
