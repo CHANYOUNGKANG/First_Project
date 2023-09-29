@@ -36,6 +36,23 @@ https://mixed-chiller-3b3.notion.site/8a2bd5cdc94f496f8babe3881ea798a5?v=a2c039a
 # ERD
 ![image](https://github.com/CHANYOUNGKANG/myselectshop/assets/140377196/9bb309e8-d8c7-4290-80f7-41da012578a3)
 
+# 개발환경
+
+Backend
+
+IntelliJ
+spring boot 3.1.3
+spring-boot-jpa
+Spring Security
+Java 17
+mysql
+🖱CI/CD
+
+cloudtype
+github Action
+
+
+
 # 트러블 슈팅
 
 ## CORS
