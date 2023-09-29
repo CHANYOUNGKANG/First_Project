@@ -38,7 +38,7 @@ https://mixed-chiller-3b3.notion.site/8a2bd5cdc94f496f8babe3881ea798a5?v=a2c039a
 
 # 개발환경
 
-Backend
+## Backend
 
 IntelliJ
 spring boot 3.1.3
@@ -46,7 +46,10 @@ spring-boot-jpa
 Spring Security
 Java 17
 mysql
-🖱CI/CD
+
+
+
+## 🖱CI/CD
 
 cloudtype
 github Action
