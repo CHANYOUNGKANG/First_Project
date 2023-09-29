@@ -27,5 +27,7 @@ https://www.chanyoungkang.com/api/posts
   <img src="https://img.shields.io/badge/Cloud-AWS-9cf.svg?style=for-the-badge&logo=Amazon Web Services" alt="Cloud: AWS">  <img src="https://img.shields.io/badge/Spring Security-2023.0.0-orange.svg?style=for-the-badge&logo=Spring Security" alt="Spring Security: 2023.0.0">
 
 
+# 서비스 아키텍쳐
+![image](https://github.com/CHANYOUNGKANG/blog/assets/140377196/f74387e0-e51e-4087-8381-2161636d2e0d)
 
 
